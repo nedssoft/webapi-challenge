@@ -17,14 +17,23 @@ const getAllProjects = async (req, res, next) => {
   }
 };
 
-const createNewProject = (req, res, next) => {
+const createNewProject = async (req, res, next) => {
   try {
-    
+    const project = await Project.insert(req.body);
+    if(project) {
+      return res.status(201).json({
+        status: 'OK',
+        project
+      })
+    } else {
+      throw new ErrorHandler(500, 'Error occurred trying to save project')
+    }
   } catch (error) {
-    
+    next(error)
   }
 }
 
 module.exports ={
-  getAllProjects
+  getAllProjects,
+  createNewProject
 }
