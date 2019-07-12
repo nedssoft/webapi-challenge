@@ -32,6 +32,9 @@ const createNewProject = async (req, res, next) => {
     next(error)
   }
 }
+const updateProject = (req, res, next) => {
+  
+}
 
 module.exports ={
   getAllProjects,
