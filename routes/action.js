@@ -1,6 +1,6 @@
 const express = require("express");
 const { getAllActions, createNewAction, deleteAction } = require("../controllers/action");
-const { addActionValidator, validateProjectId } = require("../middlewares");
+const { addActionValidator, validateProjectId, validateActionId } = require("../middlewares");
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.post(
   addActionValidator,
   createNewAction
 );
-router.delete("/:id", deleteAction);
+router.delete("/:id",validateActionId, deleteAction);
 
 
 module.exports = router;
