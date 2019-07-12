@@ -48,8 +48,26 @@ const deleteAction = async (req, res, next) => {
   }
 }
 
+const updateAction = async (req, res, next) => {
+  try {
+    const { action, body } = req;
+    const updatedAction = await Action.update(action.id, body)
+    if (updatedAction) {
+      res.status(200).json({
+        status: 'OK',
+        updatedAction,
+        message: 'Action updated successfully'
+      })
+    } else {
+      throw new ErrorHandler(500, 'Error occurred trying to save Action')
+    }
+  } catch (error) {
+    next(error)
+  }
+}
 module.exports = {
   getAllActions,
   createNewAction,
-  deleteAction
+  deleteAction,
+  updateAction
 };
