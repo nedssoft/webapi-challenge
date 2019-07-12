@@ -30,7 +30,7 @@ async function validateProjectId(req, res, next) {
   } else {
     const project = await Project.get(id);
     if (project) {
-      req.body.project = project;
+      req.project = project;
       next()
     } else {
       next({statusCode: 404, message:"Project with the specified ID does not exist"})

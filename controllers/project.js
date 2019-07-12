@@ -32,11 +32,26 @@ const createNewProject = async (req, res, next) => {
     next(error)
   }
 }
-const updateProject = (req, res, next) => {
-  
+const updateProject = async (req, res, next) => {
+  try {
+    const { project, body } = req;
+    const updatedProject = await Project.update(project.id, body)
+    if (updatedProject) {
+      res.status(200).json({
+        status: 'OK',
+        updatedProject,
+        message: 'Project updated successfully'
+      })
+    } else {
+      throw new ErrorHandler(500, 'Error occurred trying to save project')
+    }
+  } catch (error) {
+    next(error)
+  }
 }
 
 module.exports ={
   getAllProjects,
-  createNewProject
+  createNewProject,
+  updateProject
 }

@@ -1,8 +1,14 @@
-const express = require('express')
-const { getAllProjects, createNewProject } = require('../controllers/project')
-const { addProjectValidator } = require('../middlewares')
-const router = express.Router()
+const express = require("express");
+const {
+  getAllProjects,
+  createNewProject,
+  updateProject
+} = require("../controllers/project");
+const { addProjectValidator, validateProjectId } = require("../middlewares");
+const router = express.Router();
 
-router.get('/', getAllProjects)
-router.post('/', addProjectValidator,createNewProject)
+router.get("/", getAllProjects);
+router.post("/", addProjectValidator, createNewProject);
+router.put("/:id", validateProjectId, addProjectValidator, updateProject);
+
 module.exports = router;
