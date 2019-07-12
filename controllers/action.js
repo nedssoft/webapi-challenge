@@ -17,6 +17,24 @@ const getAllActions = async (req, res, next) => {
   }
 };
 
+const createNewAction = async (req, res, next) => {
+  try {
+    req.body.project_id = req.project.id
+    const action = await Action.insert(req.body);
+    if(action) {
+      return res.status(201).json({
+        status: 'OK',
+        action
+      })
+    } else {
+      throw new ErrorHandler(500, 'Error occurred trying to save action')
+    }
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
-  getAllActions
+  getAllActions,
+  createNewAction 
 };
