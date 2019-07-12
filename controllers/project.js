@@ -17,6 +17,14 @@ const getAllProjects = async (req, res, next) => {
   }
 };
 
+const createNewProject = (req, res, next) => {
+  try {
+    
+  } catch (error) {
+    
+  }
+}
+
 module.exports ={
   getAllProjects
 }
