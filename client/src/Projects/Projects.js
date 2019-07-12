@@ -34,7 +34,8 @@ class Projects extends React.Component {
     axios
       .get(BASE_URL)
       .then(res => {
-        this.setState({ projects: res.data.data });
+  
+        this.setState({ projects: res.data.projects });
       })
       .catch(err => {
         console.log(err);
