@@ -34,8 +34,22 @@ const createNewAction = async (req, res, next) => {
   }
 }
 
+const deleteAction = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const deleted = await Action.remove(id);
+    if (deleted) {
+      return res.status(200).json({ message: "Action deleted"})
+    } else {
+       throw new ErrorHandler(500, 'Internal server error')
+    }
+  } catch (error) {
+    next(error)
+  }
+}
 
 module.exports = {
   getAllActions,
-  createNewAction 
+  createNewAction,
+  deleteAction
 };
