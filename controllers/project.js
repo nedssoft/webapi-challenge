@@ -67,10 +67,27 @@ const getProjectById = (req, res) => {
   const { project } = req
   return res.status(200).json({ message: 'OK', project})
 }
+
+const getProjectActions = async (req, res, next) => {
+  try {
+    const actions = await Project.getProjectActions(req.project.id)
+    if(actions.length) {
+      return res.status(201).json({
+        status: 'OK',
+        actions
+      })
+    } else {
+      throw new ErrorHandler(404, 'No action found for the project with specified ID')
+    }
+  } catch (error) {
+    next(error)
+  }
+}
 module.exports ={
   getAllProjects,
   createNewProject,
   updateProject,
   deleteProject,
-  getProjectById 
+  getProjectById,
+  getProjectActions
 }

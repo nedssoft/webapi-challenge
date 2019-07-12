@@ -34,6 +34,7 @@ const createNewAction = async (req, res, next) => {
   }
 }
 
+
 module.exports = {
   getAllActions,
   createNewAction 
