@@ -49,9 +49,28 @@ const updateProject = async (req, res, next) => {
     next(error)
   }
 }
+const deleteProject = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const deleted = await Project.remove(id);
+    if (deleted) {
+      return res.status(200).json({ message: "Project deleted"})
+    } else {
+       throw new ErrorHandler(500, 'Internal server error')
+    }
+  } catch (error) {
+    next(error)
+  }
+}
 
+const getProjectById = (req, res) => {
+  const { project } = req
+  return res.status(200).json({ message: 'OK', project})
+}
 module.exports ={
   getAllProjects,
   createNewProject,
-  updateProject
+  updateProject,
+  deleteProject,
+  getProjectById 
 }
