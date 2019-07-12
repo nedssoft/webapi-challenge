@@ -65,9 +65,15 @@ const updateAction = async (req, res, next) => {
     next(error)
   }
 }
+
+const getActionById = (req, res) => {
+  const { action } = req
+  return res.status(200).json({ message: 'OK', action})
+}
 module.exports = {
   getAllActions,
   createNewAction,
   deleteAction,
-  updateAction
+  updateAction,
+  getActionById
 };
